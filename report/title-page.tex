@@ -1,0 +1,69 @@
+\documentclass[a4paper,12pt]{report}
+\addtolength{\oddsidemargin}{-1.cm}
+\addtolength{\textwidth}{2cm}
+\addtolength{\topmargin}{-2cm}
+\addtolength{\textheight}{3.5cm}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage[pdftex]{graphicx}
+
+% define the title
+\author{H.H.G Coppejans}
+\title{LaTeX template}
+\begin{document}
+\setlength{\parskip}{6pt}
+% generates the title
+\begin{titlepage}
+\begin{center}
+% Upper part of the page
+\includegraphics[width=1\textwidth]{./AUlogo.png}\\[0.4cm]    
+\textsc{\Large Bachelor thesis}\\[0.5cm]
+% Title
+\HRule \\[0.4cm]
+{ \huge \bfseries The robot attack something etc.}\\[0.4cm]
+\HRule \\[0.4cm]
+% Author and supervisor
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Marcus Sellebjerg
+\end{flushleft}
+\end{minipage}
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Student number:} \\
+201808635
+\end{flushright}
+\end{minipage}
+\vspace{10mm}
+\begin{center}
+    Here is some text
+\end{center}
+\vfill
+% Bottom of the page
+{\large \today}
+\end{center}
+\end{titlepage}
+
+
+\footnotesize
+\normalsize
+\setcounter{chapter}{1}
+\renewcommand{\thesection}{\arabic{section}}
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+\section{Oracle attacks}
+\section{PKCS padding}
+\section{Bleichenbachers attack from 1998}
+\section{Why it's hard to remove the oracle}
+\section{Different variations of the attack}
+\section{Probable solutions}
+\section{solutions implemented in danskebank / other places}
+\section{Eventually solving it with ECC}
+
+\bibliography{myrefs}{} % expects file "myrefs.bib"
+\bibliographystyle{ieeetr}
+\end{document}
