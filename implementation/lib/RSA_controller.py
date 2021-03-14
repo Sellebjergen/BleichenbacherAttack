@@ -26,16 +26,8 @@ class RSA_controller:
         decrypted_text = rsa_private_key.decrypt(encrypted_text, str.encode("Error"))
         return decrypted_text
 
-    def get_conforming_status(self, cipher):
-        try:
-            print(f"trying with cipher: {cipher}")
-            sentinel = str.encode("Is not PKCS conforming.")
-            rsa_private_key = RSA.importKey(self.private_key)
-            rsa_private_key = PKCS1_v1_5.new(rsa_private_key)
-            decrypted_text = rsa_private_key.decrypt(cipher, sentinel)
-            if decrypted_text == sentinel:
-                return False
-            else:
-                return True
-        except:
-            return False
+    def get_public_key(self):
+        return self.public_key
+
+    def get_amount_of_bits(self):
+        return self.amount_of_bits
