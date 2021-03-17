@@ -11,12 +11,12 @@ class Oracle:
         self.RSA_controller = RSA
 
     def get_conforming_status(self, cipher):
-        sentinel = str.encode("Is not PKCS conforming.")
-        rsa_private_key = RSA.importKey(self.RSA_controller.private_key)
-        rsa_private_key = PKCS1_v1_5.new(rsa_private_key)
-        decrypted_text = rsa_private_key.decrypt(cipher, sentinel)
+        try:
+            sentinel = str.encode("Is not PKCS conforming.")
+            rsa_private_key = PKCS1_v1_5.new(self.RSA_controller.private_key)
+            decrypted_text = rsa_private_key.decrypt(cipher, sentinel)
 
-        if decrypted_text == sentinel:
+            if decrypted_text == sentinel: return False
+            else: return True
+        except:
             return False
-        else:
-            return True
