@@ -12,20 +12,20 @@ class BleichenBacherAttack:
 
         self.oracle = oracle
 
-    def call_oracle(self, cipher, lower_bound, upper_bound):
+    def call_oracle(self, lower_bound, upper_bound):
         e = self.rsa.get_public_key().e
         n = self.rsa.get_public_key().n
-        c = bytes_to_long(cipher)
+        c = bytes_to_long(self.cipher_bytes)
 
         for s_i in range(lower_bound, upper_bound):
+            if s_i % 1000000 == 0:
+                print(s_i)
             c_i = (c * pow(s_i, e, n)) % n
             c_i_bytes = long_to_bytes(c_i)
             if self.oracle.get_conforming_status(c_i_bytes):
-                print("found conforming message")
+                print("found a value")
 
-        print("found no messages")
-
-
+        print("searching has completed")
 
     def run(self):
         B = 2 ** (8 * (self.rsa.amount_of_bits - 2))
@@ -35,12 +35,7 @@ class BleichenBacherAttack:
         n = self.rsa.get_public_key().n
 
         # step 1.   blinding
-        c = bytes_to_long(self.cipher_bytes)
-        for s_i in range(lower_bound, upper_bound):
-            calc = (c * (s_i ** e)) % n
-            calc_bytes = long_to_bytes(calc)
-            if self.oracle.get_conforming_status(calc_bytes):
-                print("found a PKCS conforming message.")
+        self.call_oracle(lower_bound, upper_bound)
 
         # step 2.   searching for PKCS conforming messages
         # step 2.a  starting the search

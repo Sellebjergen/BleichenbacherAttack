@@ -16,7 +16,9 @@ class Oracle:
             rsa_private_key = PKCS1_v1_5.new(self.RSA_controller.private_key)
             decrypted_text = rsa_private_key.decrypt(cipher, sentinel)
 
-            if decrypted_text == sentinel: return False
-            else: return True
+            if decrypted_text == sentinel:
+                return False
+            else:
+                return True
         except:
             return False

@@ -6,7 +6,7 @@ from implementation.BleichenBacherAttack import *
 def print_starting_msg():
     print()
     print(" // =========================================== //")
-    print("    Starting the bleichenbacher Oracle attack")
+    print("     Starting the bleichenbacher Oracle attack")
     print(" // =========================================== //")
     print()
 
