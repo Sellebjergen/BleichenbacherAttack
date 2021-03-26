@@ -1,0 +1,53 @@
+\documentclass[a4paper,12pt]{report}
+\addtolength{\oddsidemargin}{-1.cm}
+\addtolength{\textwidth}{2cm}
+\addtolength{\topmargin}{-2cm}
+\addtolength{\textheight}{3.5cm}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\usepackage[pdftex]{graphicx}
+\usepackage{fancyhdr}
+
+
+% settings.
+\pagestyle{fancy}
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\begin{document}
+% --- Front page --- %
+\input{chapters/frontpage}
+
+
+
+% --- Abstract and TOC --- %
+\pagenumbering{roman}
+\section*{abstract}
+Here is place for an abstract
+\thispagestyle{plain}
+\newpage
+% TODO: (low) find a way to push this to the top of the page.
+\tableofcontents
+\newpage
+
+
+
+% --- From here the chapters begin --- %
+\pagenumbering{arabic}
+
+\input{chapters/introduction}
+\section{Oracle attacks}
+\section{PKCS padding}
+\section{Bleichenbachers attack from 1998}
+\section{Why it's hard to remove the oracle}
+\section{Different variations of the attack}
+\section{Probable solutions}
+\section{solutions implemented in danskebank / other places}
+\section{Eventually solving it with ECC}
+
+
+
+% --- Bibliography section --- %
+%\bibliography{bibliography}
+%\bibliographystyle{ieeetr}
+\end{document}
