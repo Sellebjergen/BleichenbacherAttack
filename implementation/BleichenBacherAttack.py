@@ -1,5 +1,4 @@
 from Crypto.Util.number import bytes_to_long, long_to_bytes
-import numpy as np
 
 # TODO: Checking the type of the oracle, if we give it an url, make a request instead.
 # TODO: Can we search after for values in the blinding phase more efficiently?
@@ -28,7 +27,7 @@ class BleichenBacherAttack:
                 print("found a value")
                 return c_0, s_i, i
 
-        # if nothing was found i return None.
+        # TODO: should maybe raise an exception?
         return None
 
     def phase2_a(self, c_0, s_i, i):

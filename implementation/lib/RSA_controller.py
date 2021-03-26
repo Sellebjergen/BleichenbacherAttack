@@ -1,8 +1,5 @@
-# from lib.pycryptodome.lib.Crypto.PublicKey import RSA
-# from lib.pycryptodome.lib.Crypto.Cipher import PKCS1_v1_5
-
-from Crypto.Cipher import PKCS1_v1_5
 from Crypto.PublicKey import RSA
+from Crypto.Cipher import PKCS1_v1_5
 
 """
     Simple class for encrypting and decrypting various messages using lib encryption and PKCS 1.5 padding.
@@ -16,7 +13,6 @@ class RSA_controller:
         self.private_key = key
         self.public_key = key.publickey()
 
-    # TODO: add option for OAEP also.
     def encrypt(self, msg):
         msg = str.encode(msg)
         rsa_public_key = PKCS1_v1_5.new(self.public_key)
