@@ -7,9 +7,18 @@ from collections import namedtuple
 rsa = RSA_controller(1024)
 rsa_e = rsa.get_public_key().e
 rsa_n = rsa.get_public_key().n
-B = 2 ** (8 * (256 - 2))
+k = rsa.get_amount_of_bits() // 8
+B = 2 ** (8 * (k - 2))
 oracle = Oracle(rsa)
 Interval = namedtuple("Interval", ["lower_bound", "upper_bound"])
+
+
+def ceil(a, b):
+    return a // b + (a % b > 0)
+
+
+def floor(a, b):
+    return a // b
 
 
 def blinding_phase(c):
@@ -22,15 +31,20 @@ def blinding_phase(c):
         s_0 += 1
 
 
-def phase2a(c_0):
-    s_1 = (rsa_n // 3 * B) + 1
+def phase2a(c):
+    s_1 = ceil(rsa_n, 3 * B)
     print(f"starting with the value of: {s_1}")
     while True:
-        math = c_0 * pow(s_1, rsa_e, rsa_n) % rsa_n
+        math = (c * pow(s_1, rsa_e, rsa_n)) % rsa_n
         math_bytes = long_to_bytes(math)
         if oracle.get_conforming_status(math_bytes):
+            print("now the value of s_1 is")
+            print(s_1)
             return s_1
         s_1 += 1
+
+
+def phase2b()
 
 
 def phase3(s, M):
@@ -43,6 +57,7 @@ def phase3(s, M):
         for r in range(lower_r, higher_r):
             temp_interval = Interval(max(a, (2 * B + r * rsa_n) // s), min(b, (3 * B - 1 + r * rsa_n) // s))
             new_M.append(temp_interval)
+    print(f"we've defined some new intervals there are now: {len(new_M)}")
     return new_M
 
 
@@ -53,26 +68,28 @@ def bleichenbacher(cipher_bytes):
     i = 1
 
     # Step 1.   Blinding phase.
-    c_0 = blinding_phase(cipher_integer)
+    # Is not necessary for now, as we know it's an encrypted message we're getting.
 
     print("step 1 finished.")
 
     # step 2.a  First iteration
-    s_1 = -1
+    s_i = -1
     if i == 1:
-        s_1 = phase2a(c_0)
+        s_i = phase2a(cipher_integer)
 
     print("step 2 finished.")
     print("We're done")
 
-    if s_1 == -1:
+    if s_i == -1:
+        # TODO: raise some kind of exception.
         print("An error has happened. The value of s_1 is not set incorrect.")
 
     # step 3.   Narrowing set of solutions.
-    M = phase3(s_1, M)
+    M = phase3(s_i, M)
 
     # step 4.   Computing the solution.
-    if len(M) == 1:
+    if len(M) == 1 and M[0].lower_bound == M[0].upper_bound:
+        # TODO: still need to implement the values to return.
         print("we're done.")
 
 
