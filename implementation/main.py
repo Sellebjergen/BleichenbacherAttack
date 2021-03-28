@@ -22,6 +22,7 @@ def floor(a, b):
 
 
 def blinding_phase(c):
+    print("starting the blinding phase")
     s_0 = 1
     while True:
         c_0_math = c * pow(s_0, rsa_e, rsa_n) % rsa_n
@@ -32,6 +33,7 @@ def blinding_phase(c):
 
 
 def phase2a(c):
+    print("starting phase 2a")
     s_1 = ceil(rsa_n, 3 * B)
     print(f"starting with the value of: {s_1}")
     while True:
@@ -44,7 +46,21 @@ def phase2a(c):
         s_1 += 1
 
 
-def phase2b()
+def phase2b(c, s_i):
+    print("starting phase 2b")
+    while True:
+        math = (c * pow(s_i, rsa_e, rsa_n)) % rsa_n
+        math_bytes = long_to_bytes(math)
+        if oracle.get_conforming_status(math_bytes):
+            print("now the value of s_1 is")
+            print(s_i)
+            return s_i
+        s_i += 1
+
+
+def phase2c(c_0, M):
+    a, b = M[0]
+    return 0, 0
 
 
 def phase3(s, M):
@@ -72,10 +88,17 @@ def bleichenbacher(cipher_bytes):
 
     print("step 1 finished.")
 
+
+    # TODO: this should be in a forloop, with i as the increment.
     # step 2.a  First iteration
     s_i = -1
     if i == 1:
         s_i = phase2a(cipher_integer)
+    elif i > 1 and len(M) >= 2:
+        s_i = phase2b(cipher_integer, s_i + 1)
+    elif len(M) == 1:
+        a, b = M[0]
+        r_i, s_i = phase2c()
 
     print("step 2 finished.")
     print("We're done")
@@ -90,7 +113,8 @@ def bleichenbacher(cipher_bytes):
     # step 4.   Computing the solution.
     if len(M) == 1 and M[0].lower_bound == M[0].upper_bound:
         # TODO: still need to implement the values to return.
-        print("we're done.")
+        result = M[0].lower_bound % rsa_n
+        return result
 
 
 if __name__ == "__main__":
