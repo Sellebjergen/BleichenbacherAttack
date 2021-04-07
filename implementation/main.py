@@ -4,7 +4,7 @@ from implementation.lib.RSA_controller import RSA_controller
 
 if __name__ == '__main__':
     # Setting up the RSA and oracle to use.
-    rsa = RSA_controller(1024)
+    rsa = RSA_controller(256)
     oracle = Oracle(rsa)
 
     # encrypting the message.
@@ -14,3 +14,6 @@ if __name__ == '__main__':
     # performing the attack given the rsa and oracle.
     result = BleichenBacherAttack(rsa, oracle).run(msg_encrypted_bytes)
     print(result)
+
+    print("----")
+    print(f"we called the oracle {oracle.get_amount_of_calls()} times")

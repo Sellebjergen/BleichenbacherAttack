@@ -86,8 +86,7 @@ class BleichenBacherAttack:
         for a, b in M:
             lower_r = self.ceil(a * s - 3 * self.B + 1, self.rsa_n)
             higher_r = self.ceil(b * s - 2 * self.B, self.rsa_n)
-            print("Differences in r higher and lower:")
-            print(higher_r - lower_r)
+            print(f"Differences in r higher and lower: {higher_r - lower_r}")
             for r in range(lower_r, higher_r):
                 lower_bound = max(a, self.ceil(2 * self.B + r * self.rsa_n, s))
                 higher_bound = min(b, self.floor(3 * self.B - 1 + r * self.rsa_n, s))
@@ -117,6 +116,7 @@ class BleichenBacherAttack:
 
             # Doing step 4
             if len(M) == 1 and M[0].lower_bound == M[0].upper_bound:
+                print("seems like we're done. Returning the resulting message.")
                 result = M[0].lower_bound % self.rsa_n
                 result_bytes = long_to_bytes(result)
                 return result_bytes.split(b"\x00")[1]
