@@ -19,7 +19,6 @@ class RSA_controller:
         encrypted_text = rsa_public_key.encrypt(msg)
         return encrypted_text
 
-    # TODO: delete this method when I'm done testing.
     def decrypt(self, encrypted_text):
         rsa_private_key = PKCS1_v1_5.new(self.private_key)
         decrypted_text = rsa_private_key.decrypt(encrypted_text, str.encode("Error"))

@@ -8,8 +8,10 @@ from Crypto.Cipher import PKCS1_v1_5
 class Oracle:
     def __init__(self, RSA):
         self.RSA_controller = RSA
+        self.amount_of_calls = 0
 
     def get_conforming_status(self, cipher):
+        self.amount_of_calls += 1
         try:
             sentinel = str.encode("Is not PKCS conforming.")
             rsa_private_key = PKCS1_v1_5.new(self.RSA_controller.private_key)
@@ -21,3 +23,6 @@ class Oracle:
                 return True
         except:
             return False
+
+    def get_amount_of_calls(self):
+        return self.amount_of_calls

@@ -103,11 +103,6 @@ class BleichenBacherAttack:
         M = [self.Interval(2 * self.B, 3 * self.B + 1)]
         i = 1
 
-        # Step 1.   Blinding phase.
-        # Is not necessary for now, as we know it's an encrypted message we're getting.
-
-        # print("step 1 finished.")
-
         while True:
             # Doing step 2
             if i == 1:
@@ -123,6 +118,7 @@ class BleichenBacherAttack:
             # Doing step 4
             if len(M) == 1 and M[0].lower_bound == M[0].upper_bound:
                 result = M[0].lower_bound % self.rsa_n
-                return long_to_bytes(result)
+                result_bytes = long_to_bytes(result)
+                return result_bytes.split(b"\x00")[1]
             i += 1
             print("Doing another iteration of step 2.")
