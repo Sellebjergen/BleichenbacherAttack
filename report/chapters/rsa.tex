@@ -1,0 +1,60 @@
+\documentclass[../master.tex]{subfiles}
+
+\begin{document}
+
+    \section{RSA}\label{sec:rsa}
+    \subsection{Key generation}\label{subsec:key-generation}
+    To generate a key set used in RSA, we'll need 2 large primes p and q.
+    Set $n = p \cdot q$ and calculate
+    $\phi(n)$ where $\phi$ is eulers phi-function given by
+    \begin{align*}
+        \phi(n) = (p-1)(q-1)
+    \end{align*}
+    using the result of $\phi(n)$ we choose a number e such that
+    \begin{align*}
+        1 \leq e \leq \phi(n) \ \ \text{and} \ \ gcd(e, \phi(n)) = 1
+    \end{align*}
+    When the number e is found, we can calculate the missing key d as
+    \begin{align*}
+        d \equiv e^{-1} \bmod \phi(n)
+    \end{align*}
+    And output (e, n) as the public key while keeping (d, n) as the private key.
+
+
+    \subsection{encryption}\label{subsec:encryption}
+    When we have the public key (e, n) we can encrypt a message by simply converting our message m to a number and afterwards
+    using the formula for decryption to get a cipher text c.
+    \begin{align*}
+        c \equiv m^e \bmod n
+    \end{align*}
+
+
+    \subsection{decryption}\label{subsec:decryption}
+    It's important to note that
+    \begin{align*}
+        (m^e \bmod n)^d \bmod n
+        \equiv
+        m^{e \cdot d} \bmod n
+        \equiv
+        m \bmod n
+    \end{align*}
+    Remembering that c was defined as $c \equiv m^e \bmod n$.
+    We see that we can decrypt the message by
+    \begin{align*}
+        m \equiv c^d \bmod n
+    \end{align*}
+    Thus we can very simply decrypt the message m using our secret key (d, n).
+
+    % TODO: Why use 65537 as e? is this just a standard? I know that 3 has been proven to be insecure in some cases (maybe this should be included).
+    % TODO: Should I describe in more detail how we convert a string to a number
+    % TODO: Should I reason more about why the formula works? instead of just refering to the standard formula?
+    % TODO: Should I include an example of rsa used in my report? I have it calculated in onenote.
+    % TODO: What is the similarity between calculating d using modular inverse and using $\phi(n)$ as the private key?
+
+    \vspace{10mm}
+    \noindent
+    It should be noted that this is only basic RSA. As it does not contain any randomness it is deterministic and vulnerable
+    to attacks.
+    Therefore, it's important that we add some kind of randomness, which is done by adding a paddingscheme.
+
+\end{document}

@@ -7,16 +7,19 @@
 
 \usepackage[pdftex]{graphicx}
 \usepackage{fancyhdr}
+\usepackage{amsmath}
+\usepackage{apacite}
+\usepackage{subfiles}
 
 
 % settings.
 \pagestyle{fancy}
 \renewcommand{\thesection}{\arabic{section}}
 
-
+% --- Document beginning.
 \begin{document}
 % --- Front page --- %
-\input{chapters/frontpage}
+\include{chapters/frontpage}
 
 
 % --- Abstract and TOC --- %
@@ -33,7 +36,8 @@ Here is place for an abstract
 
 % --- From here the chapters begin --- %
 \pagenumbering{arabic}
-\input{chapters/introduction}                       % this is currently just a test.
+\subfile{chapters/introduction.tex}                       % this is currently just a test.
+\subfile{chapters/rsa.tex}
 \section{Oracle attacks}
 \section{PKCS padding}
 \section{Bleichenbachers attack from 1998}
@@ -45,6 +49,6 @@ Here is place for an abstract
 
 
 % --- Bibliography section --- %
-%\bibliography{bibliography}
-%\bibliographystyle{ieeetr}
+\bibliography{bibliography}
+\bibliographystyle{apacite}
 \end{document}
