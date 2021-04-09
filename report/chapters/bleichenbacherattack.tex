@@ -1,0 +1,43 @@
+\documentclass[../master.tex]{subfiles}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+
+\begin{document}
+
+    \section{Bleichen bacher oracle attack}
+    \subsection{overview of the attack}
+    Suppose we have access to an Oracle which can tell us if an arbitrary cipher text is PKCS conforming and got hold
+    of the ciphertext c of the message m.
+    The attacker would like to find
+    \begin{align*}
+        m \equiv c^d \bmod n
+    \end{align*}
+    The attacker choose a random s and calculates
+    \begin{align*}
+        c' \equiv c \cdot s^e \bmod n && s \in \mathbb{N}
+    \end{align*}
+    Which can then be send to the oracle asking if it's PKCS conforming.
+    Remember from RSA that given the public key (e, n) and private key (d, n) it holds that
+    \begin{align*}
+        c' \equiv c \cdot s^e \bmod n
+    \end{align*}
+    and that the oracle will try to decrypt the cipher and return whether that's PKCS conforming.
+    \begin{align*}
+    (c')^d \equiv (c \cdot s^e)^d \bmod n \ \ \Rightarrow \ \ (c')^d \equiv m \cdot s \bmod n
+    \end{align*}
+    Therefore if the oracle says that the ciphertext c' is PKCS conforming
+    we'll know that the first 2 bytes of $m \cdot s$ is 00 and 02.
+    We have then extracted a tiny bit of information from the message by asking the oracle.
+    \begin{align*}
+        2B \leq m \cdot s \bmod n < 3B
+    \end{align*}
+    Where $B = 2^{8(k-2)}$ and k is the length of n in bytes.
+    Repeating this for different integers s and using previous obtained information,
+    we'll eventually narrow the solution so much that we can dervice m.
+
+    % question: Why is this value 2B \leq ms < 3B, where does the number 2 and 3 come from?
+
+    \subsection{The algorihtm}
+
+
+\end{document}

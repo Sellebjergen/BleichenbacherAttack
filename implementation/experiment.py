@@ -4,7 +4,7 @@ from lib.RSA_controller import RSA_controller
 from time import time
 
 # Just some options to configure the tests really quick
-amount_of_tries = 1
+amount_of_tries = 15
 
 # TODO: run again to make sure that it's not just the msg.
 
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     #     run_attack_with_bitsize(512)
 
     for i in range(amount_of_tries):
-        run_attack_with_bitsize(1024)
+        run_attack_with_bitsize(4096)
 
     # for i in range(amount_of_tries):
     #     run_attack_with_bitsize(2048)
