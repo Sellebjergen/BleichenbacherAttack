@@ -3,10 +3,10 @@ from lib.Oracle import Oracle
 from lib.RSA_controller import RSA_controller
 from time import time
 
+import matplotlib.pyplot as plt
+
 # Just some options to configure the tests really quick
 amount_of_tries = 100
-
-# TODO: run again to make sure that it's not just the msg.
 
 
 def use_attack(bitsize):
@@ -40,27 +40,34 @@ def run_attack_with_bitsize(bitsize):
     save_data(bitsize, oracle_calls, time_used, result)
 
 
+def draw_barchart(bits):
+    x_bar = get_amount_of_oracle_calls(bits)
+    plt.bar(range(len(x_bar)), x_bar)
+    plt.title(f"Amount of oracle calls for {bits} bit")
+    plt.ylabel("Amount of oracle calls")
+    plt.show()
+
+
+def get_mean_amountOfCalls(bits):
+    x_bar = get_amount_of_oracle_calls(bits)
+    mean = sum(x_bar) / len(x_bar)
+    return mean
+
+
+def get_amount_of_oracle_calls(bits):
+    x_bar = []
+    with open("data/data.csv", "r") as f:
+        lines = f.readlines()
+        for line in lines[1:]:
+            line = line.split(",")
+            bitamount = int(line[0])
+            if bitamount == bits:
+                oracle_calls = int(line[1])
+                x_bar.append(oracle_calls)
+    return x_bar
+
+
 if __name__ == '__main__':
-    # for i in range(amount_of_tries):
-    #     run_attack_with_bitsize(256)
-    #
-    # for i in range(amount_of_tries):
-    #     run_attack_with_bitsize(512)
-
-    for i in range(amount_of_tries):
-        run_attack_with_bitsize(1024)
-        print("try number: " + str(i))
-
-    for i in range(amount_of_tries):
-        run_attack_with_bitsize(2048)
-        print("try number: " + str(i))
-
-    for i in range(50):
-        run_attack_with_bitsize(4096)
-        print("try number: " + str(i))
-
-    # for i in range(amount_of_tries):
-    #     run_attack_with_bitsize(2048)
-    #
-    # for i in range(amount_of_tries):
-    #     run_attack_with_bitsize(4096)
+    print("something seems to be right here.")
+    draw_barchart(4096)
+    print(get_mean_amountOfCalls(1024))

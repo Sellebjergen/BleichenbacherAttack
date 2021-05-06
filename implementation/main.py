@@ -3,8 +3,9 @@ from implementation.lib.Oracle import Oracle
 from implementation.lib.RSA_controller import RSA_controller
 
 if __name__ == '__main__':
+    print("--- Simulating Bleichenbacher oracle padding attack ---")
     # Setting up the RSA and oracle to use.
-    rsa = RSA_controller(256)
+    rsa = RSA_controller(2048)
     oracle = Oracle(rsa)
 
     # encrypting the message.
