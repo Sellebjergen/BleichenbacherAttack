@@ -4,7 +4,7 @@ from collections import namedtuple
 """
     Implementation of the bleichen bacher oracle attack according to
     the original paper written by Daniel bleichen bacher.
-    
+
     http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf
 """
 verbose = False
@@ -19,6 +19,11 @@ class BleichenBacherAttack:
         self.B = 2 ** (8 * (self.k - 2))
         self.oracle = oracle
         self.Interval = namedtuple("Interval", ["lower_bound", "upper_bound"])
+
+        # These values are only to try and see what happens in the attack.
+        self.amount_step2a = 0
+        self.amount_step2b = 0
+        self.amount_step2c = 0
 
     @staticmethod
     def ceil(a, b):
@@ -124,10 +129,13 @@ class BleichenBacherAttack:
         while True:
             # Doing step 2
             if i == 1:
+                self.amount_step2a += 1
                 s_i = self.phase2a(cipher_integer)
             elif i > 1 and len(M) >= 2:
+                self.amount_step2b += 1
                 s_i = self.phase2b(cipher_integer, s_i + 1)
             elif len(M) == 1:
+                self.amount_step2c += 1
                 s_i = self.phase2c(cipher_integer, s_i, M[0])
 
             # Doing step 3

@@ -6,8 +6,8 @@ from Crypto.Cipher import PKCS1_v1_5
 
 
 class Oracle:
-    def __init__(self, RSA):
-        self.RSA_controller = RSA
+    def __init__(self, rsa):
+        self.RSA_controller = rsa
         self.amount_of_calls = 0
 
     def get_conforming_status(self, cipher):

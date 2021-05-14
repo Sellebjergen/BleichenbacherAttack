@@ -5,7 +5,7 @@ from implementation.lib.RSA_controller import RSA_controller
 if __name__ == '__main__':
     print("--- Simulating Bleichenbacher oracle padding attack ---")
     # Setting up the RSA and oracle to use.
-    rsa = RSA_controller(2048)
+    rsa = RSA_controller(1024)
     oracle = Oracle(rsa)
 
     # encrypting the message.
@@ -13,8 +13,13 @@ if __name__ == '__main__':
     msg_encrypted_bytes = rsa.encrypt(msg)
 
     # performing the attack given the rsa and oracle.
-    result = BleichenBacherAttack(rsa, oracle).run(msg_encrypted_bytes)
-    print(result)
+    attack = BleichenBacherAttack(rsa, oracle)
+    attack.run(msg_encrypted_bytes)
+    print(attack)
 
     print("----")
     print(f"we called the oracle {oracle.get_amount_of_calls()} times")
+    print(f"Step 2.a was performed: {attack.amount_step2a}")
+    print(f"Step 2.b was performed: {attack.amount_step2b}")
+    print(f"Step 2.c was performed: {attack.amount_step2c}")
+    print("----")

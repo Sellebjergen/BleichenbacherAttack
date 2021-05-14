@@ -67,7 +67,29 @@ def get_amount_of_oracle_calls(bits):
     return x_bar
 
 
-if __name__ == '__main__':
-    print("something seems to be right here.")
+def draw_barcharts():
+    print("Drawing barchart for 1024 bits")
+    draw_barchart(1024)
+    print("Drawing barchart for 2048 bits")
+    draw_barchart(2048)
+    print("Drawing barchart for 4096 bits")
     draw_barchart(4096)
-    print(get_mean_amountOfCalls(1024))
+
+
+def get_mean_values():
+    calls_1024 = get_amount_of_oracle_calls(1024)
+    calls_2048 = get_amount_of_oracle_calls(2048)
+    calls_4096 = get_amount_of_oracle_calls(4096)
+    print(f"mean calls to oracle for 1024 bits: ")
+    print(calls_1024)
+    print("-" * 25)
+    print("mean calls to oracle for 2048 bits")
+    print(calls_2048)
+    print("-" * 25)
+    print("mean calls to oracle for 4096 bits")
+    print(calls_4096)
+    print("-" * 25)
+
+
+if __name__ == '__main__':
+    get_mean_values()
