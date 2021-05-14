@@ -14,11 +14,11 @@ if __name__ == '__main__':
 
     # performing the attack given the rsa and oracle.
     attack = BleichenBacherAttack(rsa, oracle)
-    attack.run(msg_encrypted_bytes)
-    print(attack)
+    result = attack.run(msg_encrypted_bytes)
+    print(result)
 
     print("----")
-    print(f"we called the oracle {oracle.get_amount_of_calls()} times")
+    print(f"we called the oracle a total amount of {oracle.get_amount_of_calls()} times")
     print(f"Step 2.a was performed: {attack.amount_step2a}")
     print(f"Step 2.b was performed: {attack.amount_step2b}")
     print(f"Step 2.c was performed: {attack.amount_step2c}")

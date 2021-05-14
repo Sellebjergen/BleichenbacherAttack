@@ -5,9 +5,7 @@ from time import time
 
 import matplotlib.pyplot as plt
 
-# Just some options to configure the tests really quick
 amount_of_tries = 100
-
 
 def use_attack(bitsize):
     rsa = RSA_controller(bitsize)
@@ -80,6 +78,7 @@ def get_mean_values():
     calls_1024 = get_amount_of_oracle_calls(1024)
     calls_2048 = get_amount_of_oracle_calls(2048)
     calls_4096 = get_amount_of_oracle_calls(4096)
+
     print(f"mean calls to oracle for 1024 bits: ")
     print(calls_1024)
     print("-" * 25)
