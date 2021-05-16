@@ -2,6 +2,7 @@ from implementation.lib.BleichenBacherAttack import BleichenBacherAttack
 from implementation.lib.Oracle import Oracle
 from implementation.lib.RSA_controller import RSA_controller
 
+
 if __name__ == '__main__':
     print("--- Simulating Bleichenbacher oracle padding attack ---")
     # Setting up the RSA and oracle to use.

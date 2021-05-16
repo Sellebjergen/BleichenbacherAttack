@@ -2,10 +2,12 @@ from lib.BleichenBacherAttack import BleichenBacherAttack
 from lib.Oracle import Oracle
 from lib.RSA_controller import RSA_controller
 from time import time
+from math import floor
 
 import matplotlib.pyplot as plt
 
 amount_of_tries = 100
+
 
 def use_attack(bitsize):
     rsa = RSA_controller(bitsize)
@@ -38,11 +40,34 @@ def run_attack_with_bitsize(bitsize):
     save_data(bitsize, oracle_calls, time_used, result)
 
 
-def draw_barchart(bits):
+def draw_barchart(bits, save=False):
+    threshold = 0
+    mean_value = 0
     x_bar = get_amount_of_oracle_calls(bits)
-    plt.bar(range(len(x_bar)), x_bar)
+    plt.bar(range(len(x_bar)), x_bar, )
     plt.title(f"Amount of oracle calls for {bits} bit")
     plt.ylabel("Amount of oracle calls")
+    plt.xlabel("Amount of tries")
+
+    if bits == 1024:
+        threshold = 554898
+        mean_value = get_mean_amountOfCalls(1024)
+    elif bits == 2048:
+        threshold = 334517
+        mean_value = get_mean_amountOfCalls(2048)
+    elif bits == 4096:
+        threshold = 245854
+        mean_value = get_mean_amountOfCalls(4096)
+    mean_value = floor(mean_value)
+
+    plt.axhline(threshold, color="red", lw=0.5, ls="--")
+    plt.axhline(mean_value, color="green", lw=0.5, ls="--")
+    plt.legend([f"Threshold of {threshold} calls",
+                f"Mean value of {mean_value} calls"])
+
+    if save:
+        plt.savefig(f"data/charts/barchart_{bits}")
+
     plt.show()
 
 
@@ -75,9 +100,9 @@ def draw_barcharts():
 
 
 def get_mean_values():
-    calls_1024 = get_amount_of_oracle_calls(1024)
-    calls_2048 = get_amount_of_oracle_calls(2048)
-    calls_4096 = get_amount_of_oracle_calls(4096)
+    calls_1024 = get_mean_amountOfCalls(1024)
+    calls_2048 = get_mean_amountOfCalls(2048)
+    calls_4096 = get_mean_amountOfCalls(4096)
 
     print(f"mean calls to oracle for 1024 bits: ")
     print(calls_1024)
@@ -91,4 +116,6 @@ def get_mean_values():
 
 
 if __name__ == '__main__':
-    get_mean_values()
+    draw_barchart(1024, save=True)
+    draw_barchart(2048, save=True)
+    draw_barchart(4096, save=True)
