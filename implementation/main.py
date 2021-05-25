@@ -1,13 +1,15 @@
 from implementation.lib.BleichenBacherAttack import BleichenBacherAttack
 from implementation.lib.Oracle import Oracle
 from implementation.lib.RSA_controller import RSA_controller
+from implementation.lib.Oracle2 import Oracle2
+from implementation.lib.RSA_controller2 import RSA_controller2
 
 
 if __name__ == '__main__':
     print("--- Simulating Bleichenbacher oracle padding attack ---")
     # Setting up the RSA and oracle to use.
-    rsa = RSA_controller(1024)
-    oracle = Oracle(rsa)
+    rsa = RSA_controller2(1024)
+    oracle = Oracle2(rsa)
 
     # encrypting the message.
     msg = "secret message"
@@ -16,8 +18,9 @@ if __name__ == '__main__':
     # performing the attack given the rsa and oracle.
     attack = BleichenBacherAttack(rsa, oracle)
     result = attack.run(msg_encrypted_bytes)
-    print(result)
 
+    # Just some pretty printing.
+    print(result)
     print("----")
     print(f"we called the oracle a total amount of {oracle.get_amount_of_calls()} times")
     print(f"Step 2.a was performed: {attack.amount_step2a}")

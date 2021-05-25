@@ -115,7 +115,63 @@ def get_mean_values():
     print("-" * 25)
 
 
+def get_amount_above_threshold_value(bits):
+    amount = 0
+    threshold = 0
+
+    if bits == 1024:
+        threshold = 554898
+    elif bits == 2048:
+        threshold = 334517
+    elif bits == 4096:
+        threshold = 245845
+
+    with open("data/data.csv", "r") as file:
+        lines = file.readlines()
+        for line in lines[1:]:
+            line = line.split(",")
+            if int(line[0]) == bits and int(line[1]) > threshold:
+                amount += 1
+    return amount
+
+
+def get_amount_below_lowerbound_value(bits):
+    amount = 0
+    lower_bound = 15644
+
+    with open("data/data.csv", "r") as file:
+        lines = file.readlines()
+        for line in lines[1:]:
+            line = line.split(",")
+            if int(line[0]) == bits and int(line[1]) < lower_bound:
+                print(line)
+                amount += 1
+    return amount
+
+
+def get_total_number_of_values(bits):
+    amount = 0
+    with open("data/data.csv", "r") as file:
+        lines = file.readlines()
+        for line in lines[1:]:
+            line = line.split(",")
+            if int(line[0]) == bits:
+                amount += 1
+    return amount
+
+
+def find_highest_amount_oracle_calls(bits):
+    highest = 0
+    with open("data/data.csv", "r") as file:
+        lines = file.readlines()
+        for line in lines[1:]:
+            line = line.split(",")
+            if int(line[0]) == bits and int(line[1]) > highest:
+                highest = int(line[1])
+    return highest
+
+
 if __name__ == '__main__':
-    draw_barchart(1024, save=True)
-    draw_barchart(2048, save=True)
-    draw_barchart(4096, save=True)
+    print(find_highest_amount_oracle_calls(1024))
+    print(find_highest_amount_oracle_calls(2048))
+    print(find_highest_amount_oracle_calls(4096))
