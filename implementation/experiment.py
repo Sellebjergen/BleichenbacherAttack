@@ -1,17 +1,16 @@
+from implementation.lib.Oracle2 import Oracle2
+from implementation.lib.RSA_controller2 import RSA_controller2
 from lib.BleichenBacherAttack import BleichenBacherAttack
 from lib.Oracle import Oracle
 from lib.RSA_controller import RSA_controller
 from time import time
 from math import floor
 
+
 import matplotlib.pyplot as plt
 
-amount_of_tries = 100
 
-
-def use_attack(bitsize):
-    rsa = RSA_controller(bitsize)
-    oracle = Oracle(rsa)
+def use_attack(bitsize, oracle, rsa):
     msg = "secret message with a very secret aes key inside."
     msg_encrypted_bytes = rsa.encrypt(msg)
     start = time()
@@ -25,15 +24,16 @@ def save_data(bitsize, oracle_calls, time_used, message):
         insertion_string = str(bitsize) + ", " \
                            + str(oracle_calls) + ", " \
                            + str(time_used) + ", " \
-                           + str(message.decode("utf-8")) + \
-                           "\n"
+                           + str(message.decode("utf-8")) + ", " \
+                           + "using oracle2 and rsa_controller2" \
+                           + "\n"
         file.write(insertion_string)
 
 
-def run_attack_with_bitsize(bitsize):
+def run_attack_with_bitsize(bitsize, oracle, rsa):
     print("-" * 80)
     print(f"Trying to do the bleichenbacher attack on bitsize {bitsize}")
-    result, time_used, oracle_calls = use_attack(bitsize)
+    result, time_used, oracle_calls = use_attack(bitsize, oracle, rsa)
     print(result)
     print(f"we called the oracle {oracle_calls} times")
     print(f"and took {time_used} seconds to run.")
@@ -172,6 +172,7 @@ def find_highest_amount_oracle_calls(bits):
 
 
 if __name__ == '__main__':
-    print(find_highest_amount_oracle_calls(1024))
-    print(find_highest_amount_oracle_calls(2048))
-    print(find_highest_amount_oracle_calls(4096))
+    for i in range(100):
+        rsa = RSA_controller2(1024)
+        oracle = Oracle2(rsa)
+        run_attack_with_bitsize(1024, oracle, rsa)

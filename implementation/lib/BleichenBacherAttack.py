@@ -8,7 +8,7 @@ from collections import namedtuple
     http://archiv.infsec.ethz.ch/education/fs08/secsem/bleichenbacher98.pdf
 """
 
-verbose = True
+verbose = False
 
 
 class BleichenBacherAttack:
