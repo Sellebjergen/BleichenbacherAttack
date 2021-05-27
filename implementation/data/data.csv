@@ -388,3 +388,34 @@ bitsize of rsa, amount of oracle calls, time in seconds, message used
 1024, 9045, 34.03826069831848, secret message with a very secret aes key inside., using oracle2 and rsa_controller2
 1024, 400798, 1552.8634057044983, secret message with a very secret aes key inside., using oracle2 and rsa_controller2
 1024, 7541, 30.351895809173584, secret message with a very secret aes key inside., using oracle2 and rsa_controller2
+1024, 95256, 430.42131519317627, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 27703, 125.7590684890747, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 37812, 159.79373955726624, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 34975, 141.33697605133057, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 7782, 34.57858419418335, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 271797, 1153.8918447494507, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 132945, 568.9775629043579, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 4746, 21.25660276412964, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 29738, 128.0259518623352, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 74199, 317.3512661457062, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 28578, 115.76346492767334, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 16056, 70.85848927497864, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 27804, 118.1011791229248, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 111109, 460.87004804611206, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 22036, 93.02043843269348, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 146350, 648.1404538154602, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 4875, 21.091947555541992, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 19348, 83.63700723648071, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 81211, 357.03928542137146, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 91699, 413.56956934928894, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 101459, 435.45570063591003, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 30071, 136.95779728889465, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 6325, 28.861843824386597, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 4132, 18.841681241989136, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 215607, 907.3454248905182, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 11318, 50.06196188926697, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 4280, 18.158435821533203, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 30968, 136.14693450927734, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 5790, 24.130494356155396, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 5289, 23.00049138069153, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes
+1024, 22703, 101.47950744628906, secret message with a very secret aes key inside., using oracle, only checking first 2 bytes

@@ -1,8 +1,6 @@
 from implementation.lib.BleichenBacherAttack import BleichenBacherAttack
-from implementation.lib.Oracle import Oracle
-from implementation.lib.RSA_controller import RSA_controller
-from implementation.lib.Oracle2 import Oracle2
-from implementation.lib.RSA_controller2 import RSA_controller2
+from implementation.lib.oracles.rsa.Oracle2 import Oracle2
+from implementation.lib.oracles.rsa.RSA_controller2 import RSA_controller2
 
 
 if __name__ == '__main__':

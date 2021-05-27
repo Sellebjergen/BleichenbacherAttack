@@ -2,5 +2,7 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/implementation/lib/oracles/rsa_custom/python-rsa" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/implementation/lib/oracles/rsa_custom/pythonRSA" vcs="Git" />
   </component>
 </project>

@@ -1,8 +1,6 @@
-from implementation.lib.Oracle2 import Oracle2
-from implementation.lib.RSA_controller2 import RSA_controller2
+from implementation.lib.oracles.rsa.Oracle2 import Oracle2
+from implementation.lib.oracles.rsa.RSA_controller2 import RSA_controller2
 from lib.BleichenBacherAttack import BleichenBacherAttack
-from lib.Oracle import Oracle
-from lib.RSA_controller import RSA_controller
 from time import time
 from math import floor
 
@@ -25,7 +23,7 @@ def save_data(bitsize, oracle_calls, time_used, message):
                            + str(oracle_calls) + ", " \
                            + str(time_used) + ", " \
                            + str(message.decode("utf-8")) + ", " \
-                           + "using oracle2 and rsa_controller2" \
+                           + "using oracle, only checking first 2 bytes" \
                            + "\n"
         file.write(insertion_string)
 
@@ -172,7 +170,7 @@ def find_highest_amount_oracle_calls(bits):
 
 
 if __name__ == '__main__':
-    for i in range(100):
+    for i in range(50):
         rsa = RSA_controller2(1024)
         oracle = Oracle2(rsa)
         run_attack_with_bitsize(1024, oracle, rsa)
