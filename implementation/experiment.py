@@ -170,7 +170,12 @@ def find_highest_amount_oracle_calls(bits):
 
 
 if __name__ == '__main__':
-    for i in range(50):
-        rsa = RSA_controller2(1024)
+    for i in range(25):
+        rsa = RSA_controller2(2048)
         oracle = Oracle2(rsa)
-        run_attack_with_bitsize(1024, oracle, rsa)
+        run_attack_with_bitsize(2048, oracle, rsa)
+
+    for i in range(25):
+        rsa = RSA_controller2(4096)
+        oracle = Oracle2(rsa)
+        run_attack_with_bitsize(4096, oracle, rsa)

@@ -6,7 +6,7 @@ from implementation.lib.oracles.rsa.RSA_controller2 import RSA_controller2
 if __name__ == '__main__':
     print("--- Simulating Bleichenbacher oracle padding attack ---")
     # Setting up the RSA and oracle to use.
-    rsa = RSA_controller2(1024)
+    rsa = RSA_controller2(4096)
     oracle = Oracle2(rsa)
 
     # encrypting the message.
