@@ -169,13 +169,19 @@ def find_highest_amount_oracle_calls(bits):
     return highest
 
 
-if __name__ == '__main__':
-    for i in range(25):
-        rsa = RSA_controller2(2048)
-        oracle = Oracle2(rsa)
-        run_attack_with_bitsize(2048, oracle, rsa)
+# this is a dangerous method. As it depends on the exact placement of the values in data.csv
+def find_mean_amount_oracle_calls_2BytesOracle():
+    result = []
+    with open("data/data.csv", "r") as file:
+        lines = file.readlines()
+        for line in lines[390:]:
+            line = line.split(",")
+            calls = int(line[1])
+            bitsize = int(line[0])
+            if bitsize == 1024:
+                result.append(calls)
+    return sum(result) / len(result)
 
-    for i in range(25):
-        rsa = RSA_controller2(4096)
-        oracle = Oracle2(rsa)
-        run_attack_with_bitsize(4096, oracle, rsa)
+
+if __name__ == '__main__':
+    print(find_mean_amount_oracle_calls_2BytesOracle())
